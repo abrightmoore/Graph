@@ -11,8 +11,20 @@ class Graph:
     def addNode(self,node):
         self.nodes.append(node)
 
+    def removeNode(self,node):
+		for n in self.nodes:
+			if n == node:
+				self.nodes.remove(node) # ToDo: Move this back into GRAPH class
+				for n1 in self.nodes: # Check through the remaining vertex lists for instances of the node to be removed
+					for v in n1.vertices:
+						for n in v.nodes:
+							if n == node:
+								v.nodes.remove(node)
+								n1.vertices.remove(v)
+
+		
     def getNodes(self):
-        return nodes
+        return self.nodes
 
     def getString(self):
         result = self.label
